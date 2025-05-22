@@ -1,14 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola mundo</title>
-</head>
-<body>
-    <h1>Carlos Alexis Maldonado Carbajal</h1>
-    <h2>Hola mundo</h2>
-    <p>Hola mundo</p>
-    <p>Hola mundo</p>
-</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - GameStore</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 100px;
+      }
+      input {
+        margin: 10px;
+        padding: 8px;
+      }
+      button {
+        padding: 10px 20px;
+      }
+      .error {
+        color: red;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>GameStore - Iniciar sesión</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Usuario" required /><br />
+      <input
+        type="password"
+        id="password"
+        placeholder="Contraseña"
+        required
+      /><br />
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <div id="errorMsg" class="error"></div>
+
+    <script>
+      const usuarios = [
+        { username: "admin", password: "1234" },
+        { username: "jugador", password: "pass" },
+      ];
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const user = document.getElementById("username").value;
+          const pass = document.getElementById("password").value;
+
+          const encontrado = usuarios.find(
+            (u) => u.username === user && u.password === pass
+          );
+
+          if (encontrado) {
+            localStorage.setItem("usuario", user);
+            window.location.href = "tienda.html";
+          } else {
+            document.getElementById("errorMsg").textContent =
+              "Usuario o contraseña incorrectos";
+          }
+        });
+    </script>
+  </body>
 </html>

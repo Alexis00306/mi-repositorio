@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tienda GameStore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">GameStore</span>
+      <button class="btn btn-outline-light" onclick="cerrarSesion()">
+        Cerrar sesión
+      </button>
+    </nav>
+
+    <div class="container mt-4">
+      <h2 class="text-center">Bienvenido, <span id="usuarioNombre"></span></h2>
+
+      <div class="row mt-4">
+        <!-- Producto 1 -->
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="https://via.placeholder.com/300x150?text=FIFA+25"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5 class="card-title">FIFA 25</h5>
+              <p class="card-text">Simulador de fútbol - $60</p>
+              <button
+                class="btn btn-primary btn-block"
+                onclick="agregarAlCarrito('FIFA 25')"
+              >
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="https://via.placeholder.com/300x150?text=Call+of+Duty"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Call of Duty: Future War</h5>
+              <p class="card-text">Shooter futurista - $70</p>
+              <button
+                class="btn btn-primary btn-block"
+                onclick="agregarAlCarrito('Call of Duty')"
+              >
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="https://via.placeholder.com/300x150?text=Zelda"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Zelda: Sky Tales</h5>
+              <p class="card-text">Aventura épica - $65</p>
+              <button
+                class="btn btn-primary btn-block"
+                onclick="agregarAlCarrito('Zelda')"
+              >
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Carrito:</h4>
+      <ul class="list-group mb-5" id="carrito"></ul>
+    </div>
+
+    <script>
+      const usuario = localStorage.getItem("usuario");
+      const carrito = [];
+
+      if (!usuario) {
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("usuarioNombre").textContent = usuario;
+      }
+
+      function agregarAlCarrito(juego) {
+        carrito.push(juego);
+        mostrarCarrito();
+      }
+
+      function mostrarCarrito() {
+        const lista = document.getElementById("carrito");
+        lista.innerHTML = "";
+        carrito.forEach((juego) => {
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.textContent = juego;
+          lista.appendChild(li);
+        });
+      }
+
+      function cerrarSesion() {
+        localStorage.removeItem("usuario");
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>
